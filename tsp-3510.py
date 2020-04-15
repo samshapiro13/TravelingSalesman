@@ -1,7 +1,7 @@
 # Sam Shapiro and Kenedy Thorne
 # CS 3510 Final Project
 
-import sys, math, random
+import sys, math, random, time
 
 #----------------------------------------------------------#
 # BEGIN GENERAL FUNCTIONS
@@ -26,7 +26,7 @@ def findDistances(nodes):
     return distances
 
 
-def generateInitialPath(nodes, distances):
+def generateInitialPath(nodes, distances, stime, timeLimit):
     initialPaths = [[0 for x in range(len(nodes))] for y in range(10)]
     for c in range(10):
         # Create initial tour in order of appearance starting at a random node
@@ -42,6 +42,8 @@ def generateInitialPath(nodes, distances):
     minTourLength = sys.maxsize
     minTourIndex = 0
     for w in range(len(initialPaths)):
+        if (time.time() - stime) >= timeLimit:
+            break
         curLen = findTourLength(initialPaths[w], distances)
         if curLen < minTourLength:
             minTourLength = curLen
@@ -60,11 +62,11 @@ def swapInPath(tour, a, b):
     return arr
 
 # Function to run 2-OPT until no more improvements are found
-def run2OPT(tour, distances):
+def run2OPT(tour, distances, stime, timeLimit):
     foundImprovement = True
     bestTour = tour
     bestTourLength = findTourLength(tour, distances)
-    while foundImprovement:
+    while foundImprovement and (time.time() - stime) < timeLimit:
         foundImprovement = False
         for f in range(len(bestTour) - 1):
             for g in range(f + 1, len(bestTour)):
@@ -89,7 +91,7 @@ def main():
     outputFile = open(sys.argv[2], 'a')
     outputFile.truncate(0)
     timeLimit = sys.argv[3]
-
+    startTime = time.time()
     nodes = []
 
     # Read input file into nodes as 2D array
@@ -101,11 +103,13 @@ def main():
 
     distances = findDistances(nodes)
 
-    firstPath = generateInitialPath(nodes, distances)
-    finalTour = run2OPT(firstPath, distances)
+    firstPath = generateInitialPath(nodes, distances, startTime, timeLimit)
+    finalTour = run2OPT(firstPath, distances, startTime, timeLimit)
     finalTourLength = findTourLength(finalTour, distances)
 
     # Write to output file
+    outputFile.write(str(time.time()-startTime))
+    outputFile.write("\n")
     outputFile.write(str(finalTourLength))
     outputFile.write("\n")
     for h in range(len(finalTour)):
