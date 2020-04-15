@@ -26,7 +26,7 @@ def findDistances(nodes):
     return distances
 
 
-def generateInitialPath(nodes, distances, stime, timeLimit):
+def generateInitialPath(nodes, distances):
     initialPaths = [[0 for x in range(len(nodes))] for y in range(10)]
     for c in range(10):
         # Create initial tour in order of appearance starting at a random node
@@ -42,8 +42,6 @@ def generateInitialPath(nodes, distances, stime, timeLimit):
     minTourLength = sys.maxsize
     minTourIndex = 0
     for w in range(len(initialPaths)):
-        if (time.time() - stime) >= timeLimit:
-            break
         curLen = findTourLength(initialPaths[w], distances)
         if curLen < minTourLength:
             minTourLength = curLen
@@ -90,7 +88,7 @@ def main():
     inputFile = open(sys.argv[1], 'r')
     outputFile = open(sys.argv[2], 'a')
     outputFile.truncate(0)
-    timeLimit = sys.argv[3]
+    timeLimit = int(sys.argv[3])
     startTime = time.time()
     nodes = []
 
@@ -103,13 +101,11 @@ def main():
 
     distances = findDistances(nodes)
 
-    firstPath = generateInitialPath(nodes, distances, startTime, timeLimit)
+    firstPath = generateInitialPath(nodes, distances)
     finalTour = run2OPT(firstPath, distances, startTime, timeLimit)
     finalTourLength = findTourLength(finalTour, distances)
 
     # Write to output file
-    outputFile.write(str(time.time()-startTime))
-    outputFile.write("\n")
     outputFile.write(str(finalTourLength))
     outputFile.write("\n")
     for h in range(len(finalTour)):
