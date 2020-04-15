@@ -27,17 +27,25 @@ def distance(x1, y1, x2, y2):
 # STILL NEED TO IMPLEMENT TIMEOUT FUNCTIONALITY
 
 
-# Create initial tour in order of appearance starting at node 1
-path = []
+# Nearest neighbor algorithm with starting at node 1
+path = [len(nodes)]
+path[0] = 1
 tourLength = 0
-for i in range(len(nodes)):
-    path.append(int(nodes[i][0]))
-for j in range(len(path)-1):
-    dist = distance(nodes[path[j] - 1][1], nodes[path[j] - 1][2], nodes[path[j]][1], nodes[path[j]][2])
-    tourLength = tourLength + dist
+for i in range(len(nodes)-1):
+    minDistance = sys.maxsize
+    nextNode = path[0]
+    for j in range(len(nodes)):
+        nodeNumber = int(nodes[j][0])
+        if nodeNumber not in path:
+            dist = distance(nodes[path[i] - 1][1], nodes[path[i] - 1][2], nodes[j][1], nodes[j][2])
+            if (dist < minDistance):
+                minDistance = dist
+                nextNode = nodeNumber
+    tourLength = tourLength + minDistance
+    path.append(nextNode)
 
 # Add first node to end of path
-finalDistance = distance(nodes[len(nodes)-1][1], nodes[len(nodes)-1][2], nodes[0][1], nodes[0][2])
+finalDistance = distance(nodes[path[len(nodes)-1]-1][1], nodes[path[len(nodes)-1]-1][2], nodes[0][1], nodes[0][2])
 tourLength = tourLength + finalDistance
 path.append(1)
 
