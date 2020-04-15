@@ -39,27 +39,34 @@ for p in range(len(nodes)):
 #----------------------------------------------------------#
 # STILL NEED TO IMPLEMENT TIMEOUT FUNCTIONALITY
 
+def generateInitialPath():
+    initialPaths = [[0 for x in range(len(nodes))] for y in range(10)]
+    for c in range(10):
+        # Create initial tour in order of appearance starting at a random node
+        path = []
+        rand = random.randint(0, 28)
+        for i in range(len(nodes)):
+            if rand + i >= len(nodes):
+                rand = -i
+            path.append(int(nodes[rand + i][0]))
+        path.append(int(nodes[rand][0]))
+        initialPaths[c] = path
 
-# Create initial tour in order of appearance starting at node 1
-path = []
-tourLength = 0
-for i in range(len(nodes)):
-    path.append(int(nodes[i][0]))
-for j in range(len(path)-1):
-    dist = distances[path[j] - 1][path[j]]
-    tourLength = tourLength + dist
+    minTourLength = sys.maxsize
+    minTourIndex = 0
+    for w in range(len(initialPaths)):
+        curLen = findTourLength(initialPaths[w])
+        if curLen < minTourLength:
+            minTourLength = curLen
+            minTourIndex = w
+    return initialPaths[minTourIndex]
 
-# Add first node to end of path
-finalDistance = distances[len(nodes)-1][0]
-tourLength = tourLength + finalDistance
-path.append(1)
 
 #----------------------------------------------------------#
 # BEGIN 2-OPT FUNCTIONALITY
 
 # Function to swap path between 2 nodes in the tour
 def swapInPath(tour, a, b):
-    arr = [len(tour)]
     arr = tour[0:a]
     arr.extend(reversed(tour[a:b + 1]))
     arr.extend(tour[b + 1:])
@@ -85,7 +92,8 @@ def run2OPT(tour):
                 break
     return bestTour
 
-finalTour = run2OPT(path)
+firstPath = generateInitialPath()
+finalTour = run2OPT(firstPath)
 finalTourLength = findTourLength(finalTour)
 
 # Write to output file

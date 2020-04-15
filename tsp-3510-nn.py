@@ -41,8 +41,8 @@ for p in range(len(nodes)):
 
 
 # Nearest neighbor algorithm with starting at node 1
-path = [len(nodes)]
-path[0] = 1
+path = []
+path.append(1)
 tourLength = 0
 for i in range(len(nodes)-1):
     minDistance = sys.maxsize
@@ -67,7 +67,6 @@ path.append(1)
 
 # Function to swap path between 2 nodes in the tour
 def swapInPath(tour, a, b):
-    arr = [len(tour)]
     arr = tour[0:a]
     arr.extend(reversed(tour[a:b + 1]))
     arr.extend(tour[b + 1:])
