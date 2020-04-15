@@ -95,7 +95,6 @@ def main():
     # Read input file into nodes as 2D array
     for line in inputFile:
         fields = line.split(" ")
-        fields[2] = fields[2][0:len(fields[2])-2]
         mapFields = map(float, fields)
         nodes.append(mapFields)
 
