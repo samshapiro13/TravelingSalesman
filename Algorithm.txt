@@ -6,6 +6,7 @@ However after playing around with the algorithm, we found it more time efficient
 
 Overall, we essentially utilized the 2-opt algorithm which goes through a path and switches the paths of nodes to better optimize it where it gets rid of paths that cross over itself and reorders itself so no longer  
 
+
 The Breakdown of our Algorithm is as follows:
 
 First, the arguments are read in to get nodes into an input file.
@@ -21,3 +22,9 @@ Then the 2opt Algorithm is run on this selected tour – which searches through 
 It iterates through the tour path until there are no improvements found and then the best tour is returned.
 Then the distance of the final tour is calculated.
 The Tour length and Final Tour is then written to the output file.
+
+
+Rationale:
+The reason we chose to have a random starting node and then just use the rest of the nodes in order is because we found that the initial path isn't as crucial as the implementation of the 2-opt algorithm on that path. Very little time is spent on creating the tour while most of the time cost in improving the chosen tour. Therfore we found it less necessary to spend more time in running a greedy algorithm to get the tour as most of the optimizations are in the 2-opt. However we didn't just want to have one random  tour that may end up being unnecssarily long which is why we chose to create 10 random tours and choose one with shortest tour length in order to have a good starting point for the 2-opt to then work on. 
+
+Since we have a random component we run the practice test 10 times to get our average TSP cost:
