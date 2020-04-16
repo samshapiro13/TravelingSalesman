@@ -1,0 +1,16 @@
+CS 3510 Traveling Salesman Implementation
+
+Overall, we essentially utilized the 2-opt algorithm which goes through a path and switches the paths of nodes to better optimize it where it gets rid of paths that cross over itself and reorders itself so no longer  
+The Breakdown of our Algorithm is as follows:
+First, we read in the arguments to get nodes into an input file
+We zero out the output File
+We get the time limit argument & start keeping track of the time for the duration of the algorithm
+We read the input file and create a 2D array of the nodes
+Then we call a function to generate our path 
+	This function picks 10 random starting points out of nodes given and creates a tour by linearly following the rest of the nodes
+	The distances of each Tour are calculated
+	The tour with the shortest(min) tour length is chosen as the tour & returned
+Then the 2opt Algorithm is run on this selected tour – which searches through the nodes to find path optimizations by uncrossing/swapping the paths between the nodes
+It iterates through the tour path until there are no improvements found and then the best tour is returned
+Then the distance of the final tour is calculated
+The Tour length and Final Tour is then written to the output file
