@@ -96,7 +96,7 @@ def main():
     for line in inputFile:
         fields = line.split(" ")
         fields[2] = fields[2].strip()
-        mapFields = map(float, fields)
+        mapFields = list(map(float, fields))
         nodes.append(mapFields)
 
     distances = findDistances(nodes)
