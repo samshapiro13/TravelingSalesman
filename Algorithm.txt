@@ -1,6 +1,8 @@
 CS 3510 Traveling Salesman Implementation
 
-First we researched a simple Greedy algorithm finding the shortest distance choosing a random starting node however this proved to be time inefficient. Thus we starting looking into other algorithm implementations and eventually reverted back to the greedy algorithm but improve it by adding the 2-opt algorithm to run after the path found by using the shortest distance greedy algorithm. However after playing around with the algorithm, we found it more time efficient to use a random generator to pick starting nodes and have the rest of the path simply be in linear oder and then to run the 2-opt algorithm as this is the most time consuming part.
+First we researched a simple Greedy algorithm finding the shortest distance choosing a random starting node however this proved to be time inefficient. 
+Thus we starting looking into other algorithm implementations and eventually reverted back to the greedy algorithm but improve it by adding the 2-opt algorithm to run after the path found by using the shortest distance greedy algorithm.
+However after playing around with the algorithm, we found it more time efficient to use a random generator to pick starting nodes and have the rest of the path simply be in linear oder and then to run the 2-opt algorithm as this is the most time consuming part.
 
 Overall, we essentially utilized the 2-opt algorithm which goes through a path and switches the paths of nodes to better optimize it where it gets rid of paths that cross over itself and reorders itself so no longer  
 
