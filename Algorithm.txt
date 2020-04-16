@@ -25,7 +25,10 @@ The Tour length and Final Tour is then written to the output file.
 
 
 Rationale:
-The reason we chose to have a random starting node and then just use the rest of the nodes in order is because we found that the initial path isn't as crucial as the implementation of the 2-opt algorithm on that path. Very little time is spent on creating the tour while most of the time cost in improving the chosen tour. Therfore we found it less necessary to spend more time in running a greedy algorithm to get the tour as most of the optimizations are in the 2-opt. However we didn't just want to have one random  tour that may end up being unnecssarily long which is why we chose to create 10 random tours and choose one with shortest tour length in order to have a good starting point for the 2-opt to then work on. 
+The reason we chose to have a random starting node and then just use the rest of the nodes in order is because we found that the initial path isn't as crucial as the implementation of the 2-opt algorithm on that path.
+Very little time is spent on creating the tour while most of the time cost in improving the chosen tour.
+Therfore we found it less necessary to spend more time in running a greedy algorithm to get the tour as most of the optimizations are in the 2-opt.
+However we didn't just want to have one random  tour that may end up being unnecssarily long which is why we chose to create 10 random tours and choose one with shortest tour length in order to have a good starting point for the 2-opt to then work on. 
 
 Since we have a random component we run the practice test 10 times to get our average TSP cost:
 28486
