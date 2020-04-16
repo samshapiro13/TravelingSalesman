@@ -28,3 +28,36 @@ Rationale:
 The reason we chose to have a random starting node and then just use the rest of the nodes in order is because we found that the initial path isn't as crucial as the implementation of the 2-opt algorithm on that path. Very little time is spent on creating the tour while most of the time cost in improving the chosen tour. Therfore we found it less necessary to spend more time in running a greedy algorithm to get the tour as most of the optimizations are in the 2-opt. However we didn't just want to have one random  tour that may end up being unnecssarily long which is why we chose to create 10 random tours and choose one with shortest tour length in order to have a good starting point for the 2-opt to then work on. 
 
 Since we have a random component we run the practice test 10 times to get our average TSP cost:
+28486
+23 29 28 26 25 27 24 16 20 14 13 9 7 3 4 5 1 2 6 11 10 8 12 15 19 18 17 21 22 23
+
+28215
+27 25 26 28 29 21 23 22 18 19 15 12 8 10 11 6 2 1 5 4 3 7 9 13 14 17 20 16 24 27
+
+29308
+11 12 15 19 22 23 21 29 28 26 20 25 27 24 16 17 18 14 13 8 9 7 3 4 5 1 2 6 10 11
+
+28765
+22 23 21 29 28 26 20 25 27 24 16 17 18 14 13 9 7 3 4 8 5 1 2 6 10 11 12 15 19 22
+
+28556
+4 5 1 2 6 10 11 12 15 19 18 22 23 21 29 28 26 20 25 27 24 16 17 14 13 8 9 7 3 4
+
+28067
+21 17 18 19 15 12 8 10 11 6 2 1 5 4 3 7 9 13 14 16 24 27 25 20 26 28 29 23 22 21
+
+28486
+18 19 15 12 8 10 11 6 2 1 5 4 3 7 9 13 14 20 16 24 27 25 26 28 29 23 22 21 17 18
+
+28494
+12 15 19 18 22 23 21 29 28 26 20 25 27 24 16 17 14 13 9 7 3 4 5 1 2 6 11 10 8 12
+
+28486
+18 19 15 12 8 10 11 6 2 1 5 4 3 7 9 13 14 20 16 24 27 25 26 28 29 23 22 21 17 18
+
+28215
+28 29 21 23 22 18 19 15 12 8 10 11 6 2 1 5 4 3 7 9 13 14 17 20 16 24 27 25 26 28
+
+28486+28215+29308+28765+28556+28067+28486+28494+28486+28215=285078
+285078 / 10 = 28507.8 
+28507.8 Average Cost of Tour
